@@ -3,6 +3,7 @@ import {AuthController} from '../controllers/authController';
 import {PlannerController} from '../controllers/plannerController';
 import {UserController} from '../controllers/userController';
 import { ReportController } from '../controllers/reportController';
+import { DashBoardController } from '../controllers/dashBoardController'
 
 
 const router = express.Router();
@@ -10,6 +11,7 @@ const authController = new AuthController();
 const plannerController = new PlannerController();
 const userController = new UserController();
 const reportController = new ReportController();
+const dashBoardController = new DashBoardController();
 
 router.post('/authenticate', (req, res) => authController.authenticate(req, res));
 router.post('/saveUser', (req, res) => userController.saveUserDetails(req, res));
@@ -18,6 +20,7 @@ router.get('/user/:userId', (req, res, next) => userController.fetchUserData(req
 });
 router.post('/updateUser', (req, res) => userController.updateUserDetails(req, res));
 router.post('/saveMonthPlan/:userId', (req, res) => plannerController.saveMonthPlan(req, res));
-router.post('/getReport/:userId',(req, res) => reportController.getReport(req, res))
+router.post('/getReport/:userId',(req, res) => reportController.getReport(req, res));
+router.get('/getCurrentDayData/:userId',(req, res) => dashBoardController.currentDayData(req, res))
 
 export default router;
